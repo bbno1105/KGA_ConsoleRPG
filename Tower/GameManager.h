@@ -1,44 +1,72 @@
 #pragma once
 #include <iostream>
-#include <corecrt_wstdio.h>
+#include <string>
+#include <iomanip>
+#include <fstream>
+
+#include "Player.h"
+
+using namespace std;
 
 class Gdata
 {
 private:
-	FILE* savefp;
+	string _dataName = "saveData.txt";
 
-public :
+public:
 	void Init()
 	{
-		if (savefp = fopen("saveData.bin", "rb"))
-		{
-			// 세이브 파일 로드
-			while (fread(&gdata->pData, sizeof(gdata->pData), 1, savefp) == 1)
-			{
-			}
-			LogInfo("map : %d", gdata->pData.mapSaveID);
-			LogInfo("POS.X : %d", gdata->pData.playerSavePos.X);
-			LogInfo("POS.Y : %d", gdata->pData.playerSavePos.Y);
-			LogInfo("DIECOUNT : %d", gdata->pData.youDieCount);
-
-			fclose(savefp);
-		}
-		else
-		{
-			// 세이브 파일 생성
-			SaveData();
-		}
+		//초기 세팅??
 	}
+
 	void SaveGame()
 	{
-		savefp = fopen("saveData.bin", "wb");
-
-		gdata->pData.mapSaveID = gdata->map.ID;
-		gdata->pData.playerSavePos.X = gdata->map.RespawnPoint.X;
-		gdata->pData.playerSavePos.Y = gdata->map.RespawnPoint.Y;
-
-		fwrite(&gdata->pData, sizeof(gdata->pData), 1, savefp);
-		fclose(savefp);
+		ofstream SaveData(_dataName);
+		SaveData << pdata.GetName() << "\n";
+		SaveData << pdata.GetHP() << "\n";
+		SaveData << pdata.GetAttackPower() << "\n";
+		SaveData << pdata.GetSpeed() << "\n";
+		SaveData << pdata.GetGold() << "\n";
+		SaveData << pdata.GetYear() << "\n";
+		SaveData << pdata.GetMonth() << "\n";
+		SaveData << pdata.GetFloor();
+		SaveData.close();
 	}
-	void LoadGame();
-}
+
+	void LoadGame()
+	{
+		ifstream LoadData;
+		if (!LoadData.is_open())
+		{
+			LoadData.open(_dataName);
+		}
+
+		string str;
+
+		getline(LoadData, str);
+		pdata.SetName(str);
+
+		getline(LoadData, str);
+		pdata.SetHP(str);
+
+		getline(LoadData, str);
+		pdata.SetAttackPower(str);
+
+		getline(LoadData, str);
+		pdata.SetSpeed(str);
+
+		getline(LoadData, str);
+		pdata.SetGold(str);
+
+		getline(LoadData, str);
+		pdata.SetYear(str);
+
+		getline(LoadData, str);
+		pdata.SetMonth(str);
+
+		getline(LoadData, str);
+		pdata.SetFloor(str);
+
+		LoadData.close();
+	}
+}gdata;
