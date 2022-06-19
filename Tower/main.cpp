@@ -1,14 +1,30 @@
 #include "GameManager.h"
+#include "Scene.h"
 
 #include <iostream>
 
+int nowScene;
+
+
 int main()
 {
-	gdata.LoadGame();
+	InGame inGame;
 
-	std::cout << pdata.GetName();
+	inGame.Init();
 
-	// gdata.SaveGame();
+	while (true)
+	{
+		switch (2)
+		{
+		case TITLE:
+
+			break;
+		case INGAME:
+			inGame.Update();
+			inGame.Render();
+			break;
+		}
+	}
 
 	return 0;
 }

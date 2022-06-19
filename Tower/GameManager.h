@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <fstream>
+#include "Common.h"
 
 #include "Player.h"
+#include "Scene.h"
 
 using namespace std;
 
@@ -13,60 +11,35 @@ class Gdata
 private:
 	string _dataName = "saveData.txt";
 
+	// 시간
+	int _year = 0;
+	int _month = 0;
+
+	// 진행도
+	int _floor = 0;
+
 public:
-	void Init()
-	{
-		//초기 세팅??
-	}
+	Pdata pdata;
 
-	void SaveGame()
-	{
-		ofstream SaveData(_dataName);
-		SaveData << pdata.GetName() << "\n";
-		SaveData << pdata.GetHP() << "\n";
-		SaveData << pdata.GetAttackPower() << "\n";
-		SaveData << pdata.GetSpeed() << "\n";
-		SaveData << pdata.GetGold() << "\n";
-		SaveData << pdata.GetYear() << "\n";
-		SaveData << pdata.GetMonth() << "\n";
-		SaveData << pdata.GetFloor();
-		SaveData.close();
-	}
+public:
+	void Init();
+	void SaveGame();
+	void LoadGame();
 
-	void LoadGame()
-	{
-		ifstream LoadData;
-		if (!LoadData.is_open())
-		{
-			LoadData.open(_dataName);
-		}
+	int GetYear();
+	void SetYear(int year);
+	void SetYear(string year);
 
-		string str;
+	int GetMonth();
+	void SetMonth(int month);
+	void SetMonth(string month);
+	void UpdateMonth(int month);
 
-		getline(LoadData, str);
-		pdata.SetName(str);
+	int GetFloor();
+	void SetFloor(int floor);
+	void SetFloor(string floor);
+	void UpdateFloor(int floor);
 
-		getline(LoadData, str);
-		pdata.SetHP(str);
+};
 
-		getline(LoadData, str);
-		pdata.SetAttackPower(str);
-
-		getline(LoadData, str);
-		pdata.SetSpeed(str);
-
-		getline(LoadData, str);
-		pdata.SetGold(str);
-
-		getline(LoadData, str);
-		pdata.SetYear(str);
-
-		getline(LoadData, str);
-		pdata.SetMonth(str);
-
-		getline(LoadData, str);
-		pdata.SetFloor(str);
-
-		LoadData.close();
-	}
-}gdata;
+static Gdata gdata;
