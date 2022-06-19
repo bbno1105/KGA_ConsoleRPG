@@ -16,6 +16,8 @@ public :
 	Pdata() = default;
 	~Pdata() = default;
 
+	void Init();
+
 	// [ 캐릭터 정보 ]
 	void SetHP(string HP);
 	

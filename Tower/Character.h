@@ -6,7 +6,7 @@ protected:
 	int _HP = 0;
 	int _nowHP = 0;
 	int _attackPower = 0;
-	int _speed = 0;
+	int _talk = 0;
 
 public :
 	int GetHP() { return _HP; }
@@ -14,14 +14,16 @@ public :
 	void UpdateHP(int HP) { _HP += HP; }
 
 	int GetNowHP() { return _nowHP; }
-	void UpdateNowHP(int HP)
+	void SetNowHP(int HP) { _nowHP = HP; }
+	bool UpdateNowHP(int HP)
 	{
 		_nowHP += HP;
-		if (_nowHP < 0)
+		if (_nowHP <= 0)
 		{
-			// »ç¸Á
-			_nowHP = 0;
+			_nowHP = _HP; // HP È¸º¹
+			return false; // »ç¸Á
 		}
+		return true;
 	}
 
 	int GetAttackPower() { return _attackPower; }
@@ -32,11 +34,11 @@ public :
 		if (_attackPower < 0) _attackPower = 0;
 	}
 
-	int GetSpeed() { return _speed; }
-	void SetSpeed(int speed) { _speed = speed; }
-	void UpdateSpeed(int speed)
+	int GetTalk() { return _talk; }
+	void SetTalk(int talk) { _talk = talk; }
+	void UpdateTalk(int talk)
 	{
-		_speed += speed;
-		if (_speed < 0) _speed = 0;
+		_talk += talk;
+		if (_talk < 0) _talk = 0;
 	}
 };

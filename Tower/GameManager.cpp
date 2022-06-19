@@ -13,7 +13,7 @@ void Gdata::SaveGame()
 	SaveData << pdata.GetName() << "\n";
 	SaveData << pdata.GetHP() << "\n";
 	SaveData << pdata.GetAttackPower() << "\n";
-	SaveData << pdata.GetSpeed() << "\n";
+	SaveData << pdata.GetTalk() << "\n";
 	SaveData << pdata.GetGold() << "\n";
 	SaveData << GetYear() << "\n";
 	SaveData << GetMonth() << "\n";
@@ -21,12 +21,13 @@ void Gdata::SaveGame()
 	SaveData.close();
 }
 
-void Gdata::LoadGame()
+bool Gdata::LoadGame()
 {
 	ifstream LoadData;
-	if (!LoadData.is_open())
+	LoadData.open(_dataName);
+	while (!LoadData.is_open())
 	{
-		LoadData.open(_dataName);
+		return false;
 	}
 
 	string str;
@@ -55,7 +56,10 @@ void Gdata::LoadGame()
 	getline(LoadData, str);
 	SetFloor(str);
 
+	pdata.SetNowHP(pdata.GetHP());
+
 	LoadData.close();
+	return true;
 }
 
 
@@ -77,9 +81,25 @@ void Gdata::UpdateMonth(int month)
 	{
 		_month += month; 
 	}
+	gdata.pdata.SetNowHP(gdata.pdata.GetHP()); // 한 달 지날때마다 회복
 }
 
 int Gdata::GetFloor() { return _floor; }
 void Gdata::SetFloor(int floor) { _floor = floor; }
 void Gdata::SetFloor(string floor) { _floor = stoi(floor); }
-void Gdata::UpdateFloor(int floor) { _floor + floor; }
+void Gdata::UpdateFloor(int floor) { _floor += floor; }
+
+int Gdata::GetScene() { return _nowScene; }
+void Gdata::ChangeSecene(int sceneNum)
+{
+	_nowScene = sceneNum;
+	switch (_nowScene)
+	{
+	case 1:
+		title.Init();
+		break;
+	case 2:
+		inGame.Init();
+		break;
+	}
+}

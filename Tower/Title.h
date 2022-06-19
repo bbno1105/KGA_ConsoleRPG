@@ -1,5 +1,7 @@
 #pragma once
 #include "Common.h"
+#include "GameManager.h"
+#include "InGame.h"
 
 class Title
 {
@@ -30,3 +32,5 @@ public:
 	void Render();
 	void Release();
 };
+
+__declspec(selectany) Title title;

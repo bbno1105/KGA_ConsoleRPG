@@ -1,15 +1,14 @@
 #pragma once
 #include "Common.h"
-
 #include "Player.h"
-#include "Scene.h"
-
-using namespace std;
+#include "Title.h"
+#include "InGame.h"
 
 class Gdata
 {
 private:
 	string _dataName = "saveData.txt";
+	int _nowScene = 0;
 
 	// ½Ã°£
 	int _year = 0;
@@ -24,7 +23,7 @@ public:
 public:
 	void Init();
 	void SaveGame();
-	void LoadGame();
+	bool LoadGame();
 
 	int GetYear();
 	void SetYear(int year);
@@ -40,6 +39,9 @@ public:
 	void SetFloor(string floor);
 	void UpdateFloor(int floor);
 
+	int GetScene();
+	void ChangeSecene(int sceneNum);
+
 };
 
-static Gdata gdata;
+__declspec(selectany) Gdata gdata;

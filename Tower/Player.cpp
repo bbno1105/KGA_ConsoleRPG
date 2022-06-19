@@ -1,10 +1,19 @@
 #include "Player.h"
 
+void Pdata::Init()
+{
+	_HP = 100;
+	_attackPower = 10;
+	_talk = 10;
+	_gold = 100;
+	SetNowHP(GetHP());
+}
+
 void Pdata::SetHP(string HP) { _HP = stoi(HP); }
 
 void Pdata::SetAttackPower(string attackPower) { _attackPower = stoi(attackPower); }
 
-void Pdata::SetSpeed(string speed) { _speed = stoi(speed); }
+void Pdata::SetSpeed(string speed) { _talk = stoi(speed); }
 
 // [ 플레이어 정보 ]
 string Pdata::GetName() { return _name; }
