@@ -316,7 +316,7 @@ void InGame::Training()
 			switch (bonus)
 			{
 			case 0: // 성공
-				gdata.pdata.UpdateTalk(1);
+				gdata.pdata.UpdateTalk(3);
 				text[0] = "이번 달은 책을 읽으며 시간을 보냈다.";
 				text[1] = "무난한 한 달이었다.";
 				text[2] = "";
@@ -324,7 +324,7 @@ void InGame::Training()
 				break;
 			case 1: // 대성공
 				gdata.pdata.UpdateHP(50);
-				gdata.pdata.UpdateTalk(2);
+				gdata.pdata.UpdateTalk(5);
 				text[0] = "이번 달은 책을 읽으며 시간을 보냈다.";
 				text[1] = "성공적인 한 달이었다.";
 				text[2] = "";
@@ -390,7 +390,7 @@ void InGame::Work()
 		{
 			gdata.pdata.UpdateGold(150);
 			gdata.pdata.UpdateHP(50);
-			gdata.pdata.UpdateTalk(1);
+			gdata.pdata.UpdateTalk(2);
 			text[0] = "이번 달은 음식점일로 시간을 보냈다.";
 			text[1] = "완벽한 한 달이었다.";
 			text[2] = "";
